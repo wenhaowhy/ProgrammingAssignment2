@@ -1,0 +1,30 @@
+##Swapped mean for inverse from coursera example.
+##Swapped "vector" for "Matrix", numeric() for matrix()
+## m changed to i for inverse values
+
+
+makeMatrix <- function(x = matrix()) {
+  i <- NULL
+  set <- function(y) {
+    x <<- y
+    i <<- NULL
+  }
+  get <- function() x
+  setinverse <- function(inverse) i <<- inverse
+  getinverse <- function() i
+  list(set=set, get=get, setinverse=setinverse, getinverse=getinverse)
+}
+
+
+cacheMatrix <- function(x, ...) {
+  i <- x$getinverse()
+  if(!is.null(i)) {
+    message("getting cached data.")
+    return(i)
+  }
+  data <- x$get()
+  i <- solve(data)
+  x$setinverse(i)
+  i
+}
+
